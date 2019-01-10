@@ -25,13 +25,13 @@ class Application extends Component {
 	}
 
 	removeCategory(name, i){
-		console.log( name );
-		console.log( i );
         let items = this.state.items.slice();
         items.splice(i, 1);
         this.setState({
             items
         });
+		// console.log( name );
+		// console.log( i );
         // console.log( "subItems ", this.state.subItems );
     }
 
