@@ -1,5 +1,5 @@
 .app {
-  background-color: #2276c2;
+  /*background-color: #2276c2;*/
   height: 100%;
   width: 100%;
   min-height: 100vh;
@@ -27,13 +27,18 @@ button {
     vertical-align: top;
 }
 
+label {
+  display: block;
+  margin-top: 1rem;
+}
+
 .subItem input {
   max-width: calc(100% - 57px);
   display: inline-block;
 }
 
-.subItem button.submit {
-  display: inline-block;
+.button-submit {
+  margin-top: 1rem;
 }
 
 .category {

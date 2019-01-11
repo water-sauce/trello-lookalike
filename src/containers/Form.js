@@ -14,17 +14,6 @@ function checkCreditCardType( name, value ){
 }
 
 class Form extends React.Component {
-	// constructor(props){
-	// 	super(props);
-	// 	this.state = {
-	// 		boring: false
-	// 	}
-
-	// 	this.handleChange = this.handleChange.bind(this);
-	// 	this.handleSubmit = this.handleSubmit.bind(this);
-	// }
-
-
 	constructor(props) {
 		super(props);
 		this.ref = React.createRef();
@@ -33,15 +22,7 @@ class Form extends React.Component {
 			fields: {},
 			errors: {},
 			name: '',
-			creditCardNumber: '',
-			ccLength: 16,
-			cvv: '',
-			cvvLength: 3,
-			month: '',
-			monthSelected: false,
-			year: '',
-			yearSelected: false,
-			formSubmitted: false
+			paragraph: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -51,34 +32,6 @@ class Form extends React.Component {
 	handleChange(event) {
 		const name = event.target.name;
 		const value = event.target.value;
-
-		if( name === "creditCardNumber" ){
-			let type = checkCreditCardType( name, value );
-
-			if( type === "amex" ){
-				this.setState({ 
-					cvvLength: 4,
-					ccLength: 15
-				});
-			} else {
-				this.setState({ 
-					cvvLength: 3,
-					ccLength: 16
-				});
-			}
-		}
-
-		if( name === "month" ){
-			this.setState({ 
-				monthSelected: true
-			});
-		}  
-
-		if( name === "year" ){
-			this.setState({ 
-				yearSelected: true
-			});
-		}
 
 		this.setState(
 			{ [ name ]: value }
@@ -108,28 +61,6 @@ class Form extends React.Component {
 			errors["name"] = "Please fill out this field.";
 		}
 
-		if( fields.creditCardNumber.length !== fields.ccLength ){
-			formIsValid = false;
-			errors["creditCardNumber"] = "Please input your credit card digits."
-		}
-
-		if( fields.cvv.length !== fields.cvvLength ){
-			formIsValid = false;
-			errors["cvv"] = "Please input your CVV2 digits."
-		}
-
-		if ( !fields.monthSelected || !fields.yearSelected ){
-			formIsValid = false;
-			errors["date"] = "Please select your credit card expiration date"
-		}
-
-		if( fields.yearSelected && fields.monthSelected ){
-			if( Number( fields.year ) === currentYear && Number( fields.month ) < currentMonth ){
-				formIsValid = false;
-				errors["date"] = "Your card may be expired. Please check again."
-			}		
-		}
-
 		this.setState({
 			errors: errors
 		});
@@ -138,13 +69,17 @@ class Form extends React.Component {
 	}
 
 
+
 	render() {
 		return (
 			<div className="container container-left">
-				<form onSubmit={this.handleSubmit}>
+				<div>
+				&#123;&#123; Wiki_Styling_collection/F8_2019_Wiki/3Column/ | placeholder.png | {this.state.name} | {this.state.paragraph} &#125;&#125; 
+				</div>
 
+				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
-						<label htmlFor="credit card name">Name</label>	
+						<label htmlFor="credit card name">H1</label>	
 						<input 
 							type="text" 
 							name="name"
@@ -158,71 +93,21 @@ class Form extends React.Component {
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="credit card number">Credit Card Number</label>
-						<input
+						<label htmlFor="paragraph">Paragraph</label>
+						<textarea
 							type="text"
-							name="creditCardNumber"
-							placeholder="Card Number"
-							maxLength={this.state.ccLength}
+							name="paragraph"
+							placeholder="Body text"
 							value={this.value}
 							onChange={this.handleChange}
 							ref={this.ref}
-							className={this.state.errors.creditCardNumber ? "error" : ""}
+							className={this.state.errors.paragraph ? "error" : ""}
 						/>
 						{this.state.errors.creditCardNumber ? <p className="errorMsg">{this.state.errors.creditCardNumber}</p> : ""}
 					</div>
-
-					<div className="form-group">
-						<label htmlFor="cvv">CVV2</label>	
-						<input
-							type="text"
-							id="cvv"
-							name="cvv"
-							placeholder="CVV2"
-							maxLength={this.state.cvvLength}
-							value={this.value}
-							onChange={this.handleChange}
-							ref={this.ref}
-							className={this.state.errors.cvv ? "error" : ""}
-						/>
-						{this.state.errors.cvv ? <p className="errorMsg">{this.state.errors.cvv}</p> : "" }
-					</div>
-
-					<div className="form-group">
-						<label htmlFor="credit card month">Month</label>
-						<select
-							name="month"
-							value={this.value}
-							onChange={this.handleChange}
-							ref={this.ref}
-							defaultValue="Exp Month"
-						>
-							<option key='month' defaultValue disabled>Exp Month</option>
-							{ Months.map(value =>
-								<option key={value} value={value}>{value}</option>
-							)}
-						</select>
-
-						<label htmlFor="credit card year">Year</label>
-						<select
-							name="year"
-							value={this.value}
-							onChange={this.handleChange}
-							ref={this.ref}
-							defaultValue="Exp Year"
-							required
-						>
-							<option key='year' defaultValue disabled>Exp Year</option>
-							{ Years.map(value =>
-								<option key={value} value={value}>{value}</option>
-							)}
-						</select>
-						{this.state.errors.date ? <p className="errorMsg">{this.state.errors.date}</p> : "" }
-					</div>
-
 					
 					<button type="submit" className="button button-submit">
-			          	Sign up Now
+			          	Copy to Clipboard
 			        </button>
 				</form>
 			</div>
@@ -232,3 +117,66 @@ class Form extends React.Component {
 
 
 export default Form;
+
+// <div className="form-group">
+// 	<label htmlFor="credit card number">Credit Card Number</label>
+// 	<input
+// 		type="text"
+// 		name="creditCardNumber"
+// 		placeholder="Card Number"
+// 		maxLength={this.state.ccLength}
+// 		value={this.value}
+// 		onChange={this.handleChange}
+// 		ref={this.ref}
+// 		className={this.state.errors.creditCardNumber ? "error" : ""}
+// 	/>
+// 	{this.state.errors.creditCardNumber ? <p className="errorMsg">{this.state.errors.creditCardNumber}</p> : ""}
+// </div>
+
+// <div className="form-group">
+// 	<label htmlFor="cvv">CVV2</label>	
+// 	<input
+// 		type="text"
+// 		id="cvv"
+// 		name="cvv"
+// 		placeholder="CVV2"
+// 		maxLength={this.state.cvvLength}
+// 		value={this.value}
+// 		onChange={this.handleChange}
+// 		ref={this.ref}
+// 		className={this.state.errors.cvv ? "error" : ""}
+// 	/>
+// 	{this.state.errors.cvv ? <p className="errorMsg">{this.state.errors.cvv}</p> : "" }
+// </div>
+
+// <div className="form-group">
+// 	<label htmlFor="credit card month">Month</label>
+// 	<select
+// 		name="month"
+// 		value={this.value}
+// 		onChange={this.handleChange}
+// 		ref={this.ref}
+// 		defaultValue="Exp Month"
+// 	>
+// 		<option key='month' defaultValue disabled>Exp Month</option>
+// 		{ Months.map(value =>
+// 			<option key={value} value={value}>{value}</option>
+// 		)}
+// 	</select>
+
+// 	<label htmlFor="credit card year">Year</label>
+// 	<select
+// 		name="year"
+// 		value={this.value}
+// 		onChange={this.handleChange}
+// 		ref={this.ref}
+// 		defaultValue="Exp Year"
+// 		required
+// 	>
+// 		<option key='year' defaultValue disabled>Exp Year</option>
+// 		{ Years.map(value =>
+// 			<option key={value} value={value}>{value}</option>
+// 		)}
+// 	</select>
+// 	{this.state.errors.date ? <p className="errorMsg">{this.state.errors.date}</p> : "" }
+// </div>

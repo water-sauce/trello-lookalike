@@ -10,10 +10,9 @@ class App extends Component {
     return (
       <div className="app">
         <header>
-          <a>Trella</a>
+          <a>Wiki </a>
         </header>
         <section className="app-body">
-          <Application />
           <Form />
         </section>
       </div>
