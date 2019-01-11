@@ -30,9 +30,6 @@ class Application extends Component {
         this.setState({
             items
         });
-		// console.log( name );
-		// console.log( i );
-        // console.log( "subItems ", this.state.subItems );
     }
 
     render() {

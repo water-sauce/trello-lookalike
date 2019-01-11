@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // <img src={} className="App-logo" alt="logo" />
-import Application from './containers/Application';
+import Application from './containers/Application2';
+import Form from './containers/Form';
 import './App.css';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         </header>
         <section className="app-body">
           <Application />
+          <Form />
         </section>
       </div>
     );

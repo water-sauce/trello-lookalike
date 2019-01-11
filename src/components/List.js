@@ -7,16 +7,19 @@ class List extends Component {
 	}
 	render() {
 		return (
-			<ul>
-			{this.props.items.map((item, index) => (
-			  	<li className="category" key={index}>
-			      	<p>{item}</p>
-			      	<button className="remove" onClick={() => { this.removeCat(item, index)}}>x</button>
-			      	<ListItem />
-			  	</li>
-			  	)
-			)}
-			</ul>
+			<div>
+				<ul>
+				{this.props.items.map((item, index) => (
+				  	<li className="category" key={index}>
+				      	<h4>{item}</h4>
+				      	<button className="remove" onClick={() => { this.removeCat(item, index)}}>x</button>
+				      	<ListItem />
+				  	</li>
+				  	)
+				)}
+				</ul>
+				<p>{this.props.subject}</p>
+			</div>
 		)
 	}
   
